@@ -1,0 +1,327 @@
+{
+	"info": {
+		"_postman_id": "64c6cc7a-dc1c-44e0-87d3-baae9f138b7b",
+		"name": "Tasks Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28501585"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"if (response?.data?.token) {",
+									"    pm.collectionVariables.set(\"TasksApiToken\", response.data.token);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log('Login Request', pm.request.body);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"hari@gmail.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{TasksBaseUrl}}/login",
+							"host": [
+								"{{TasksBaseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Hari\",\n    \"email\": \"hari@gmail.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{TasksBaseUrl}}/register",
+							"host": [
+								"{{TasksBaseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Add Task",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "subject",
+									"value": "Test Subject",
+									"contentType": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Test Description",
+									"type": "text"
+								},
+								{
+									"key": "start_date",
+									"value": "2024-06-22",
+									"type": "text"
+								},
+								{
+									"key": "due_date",
+									"value": "2024-06-25",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "Incomplete",
+									"type": "text"
+								},
+								{
+									"key": "priority",
+									"value": "High",
+									"type": "text"
+								},
+								{
+									"key": "notes[0][subject]",
+									"value": "Test Title 1",
+									"type": "text"
+								},
+								{
+									"key": "notes[0][note]",
+									"value": "Test Note 1",
+									"type": "text"
+								},
+								{
+									"key": "notes[0][attachments][]",
+									"type": "file",
+									"src": "/home/maxx/Downloads/Hari Krishna Full Stack Developer - j1924.pdf"
+								},
+								{
+									"key": "notes[1][subject]",
+									"value": "Test Title 2",
+									"type": "text"
+								},
+								{
+									"key": "notes[1][note]",
+									"value": "Test Note 2",
+									"type": "text"
+								},
+								{
+									"key": "notes[1][attachments][]",
+									"type": "file",
+									"src": "/home/maxx/Pictures/299398791_1983372845340663_1111548640041483192_n.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{TasksBaseUrl}}/tasks",
+							"host": [
+								"{{TasksBaseUrl}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TasksBaseUrl}}/tasks?filter[status]=Incomplete&filter[due_date]=2024-06-22&filter[priority]=High&filter[notes]=true&order[priority]=Low&order[first]=desc",
+							"host": [
+								"{{TasksBaseUrl}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "filter[status]",
+									"value": "Incomplete"
+								},
+								{
+									"key": "filter[due_date]",
+									"value": "2024-06-22"
+								},
+								{
+									"key": "filter[priority]",
+									"value": "High"
+								},
+								{
+									"key": "filter[notes]",
+									"value": "true"
+								},
+								{
+									"key": "order[priority]",
+									"value": "Low"
+								},
+								{
+									"key": "order[first]",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TasksApiToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{TasksBaseUrl}}/status",
+					"host": [
+						"{{TasksBaseUrl}}"
+					],
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.request.headers.add({key: 'Accept', value: 'application/json' })"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "TasksBaseUrl",
+			"value": "http://localhost/api",
+			"type": "string"
+		},
+		{
+			"key": "TasksApiToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "authToken",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,33 @@
+Below is your assignment as the next part of the interview process
+
+1. Create a module 'Task' with the following fields:
+Subject (Text)
+Description (Textarea)
+Start Date (Date)
+Due Date (Date)
+Status (Enum: New, Incomplete, Complete)
+Priority (Enum: High, Medium, Low)
+2. Create a module 'Note' with the following fields:
+Subject (Text)
+Attachment (File: Multiple Files) (File: Any type of file)
+Note (Textarea)
+3. Create a relationship between 'Task' & 'Note' with the following details:
+Primary Module: Tasks
+Relationship Type: One to Many
+Related Module: Notes
+
+Create REST APIs to perform the following transactions:
+1. User Login & Registration
+2. All further APIs should have token-based authentication. You are free to use OAuth, OAuth 2, JWT, etc.
+3. Create a task with Multiple Notes (pass notes in array format) & attachments in a single request. Only logged in users can hit this request
+4. Retrieve all the tasks with Notes. Only logged in users can hit this request
+
+Order:
+Priority "High"
+First, Maximum Count of Notes
+
+Filter:
+filter[status],
+filter[due_date],
+filter[priority],
+filter[notes]: Retrieve tasks which have minimum one note attached
