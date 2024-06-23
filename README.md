@@ -29,12 +29,14 @@ Generate Key
 Run `sail artisan key:generate` or `php artisan key:generate`
 
 ## Post Setup
+
 Run database migrations:
 - Using Sail: `sail artisan migrate`
 - Without Sail: `php artisan migrate`
+  
 Seed the database:
-- Using Sail: sail artisan db:seed
-- Without Sail: php artisan db:seed
+- Using Sail: `sail artisan db:seed`
+- Without Sail: `php artisan db:seed`
 ## Postman Collection
 Import the provided Postman collection (Tasks Api Postman Collection.json) into your Postman application to interact with the API.
 
