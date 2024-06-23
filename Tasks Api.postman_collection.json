@@ -90,6 +90,33 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TasksApiToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{TasksBaseUrl}}/logout",
+							"host": [
+								"{{TasksBaseUrl}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -202,7 +229,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{TasksBaseUrl}}/tasks?filter[status]=Incomplete&filter[due_date]=2024-06-22&filter[priority]=High&filter[notes]=true&order[priority]=Low&order[first]=desc",
+							"raw": "{{TasksBaseUrl}}/tasks?filter[status]=Incomplete&filter[priority]=High&filter[notes]=true&order[priority]=Low&order[first]=desc",
 							"host": [
 								"{{TasksBaseUrl}}"
 							],
@@ -216,7 +243,8 @@
 								},
 								{
 									"key": "filter[due_date]",
-									"value": "2024-06-22"
+									"value": "2024-06-22",
+									"disabled": true
 								},
 								{
 									"key": "filter[priority]",

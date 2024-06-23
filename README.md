@@ -77,6 +77,10 @@ Body:
 ```
 Description: Registers a new user.
 
+Login
+Endpoint: `POST {{TasksBaseUrl}}/logout`
+Description: Logs out user.
+
 Tasks
 Add Task
 
