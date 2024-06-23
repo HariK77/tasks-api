@@ -46,7 +46,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"hari@gmail.com\",\n    \"password\": \"password\"\n}",
+							"raw": "{\n    \"email\": \"jhond@gmail.com\",\n    \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -72,7 +72,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Hari\",\n    \"email\": \"hari@gmail.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\"\n}",
+							"raw": "{\n    \"name\": \"Jhon Doe\",\n    \"email\": \"jhond@gmail.com@gmail.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
