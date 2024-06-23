@@ -15,21 +15,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         User::factory()->create([
             'name' => 'Jhon Flower',
             'email' => 'jhonf@gmail.com',
         ]);
 
         Task::factory()
-            ->count(10)
-            ->has(Note::factory()->count(rand(1, 5)), 'notes')
+            ->count(100)
             ->create();
 
-        // Create tasks without notes
-        Task::factory()
-            ->count(10)
-            ->create();
+        // Create notes
+        $tasksCount = Task::count();
+        Note::factory()
+            ->count(200)
+            ->create(
+                [
+                    'task_id' => function () use ($tasksCount) {
+                        return rand(1, $tasksCount);
+                    },
+                ]
+            );
     }
 }

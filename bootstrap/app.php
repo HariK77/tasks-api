@@ -7,8 +7,10 @@ use App\Exceptions\CustomValidationException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -18,9 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->api(append: [
-            ForceJson::class
-        ]);
+        $middleware->append(ForceJson::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->renderable(function (ValidationException $exception, $request) {
@@ -47,5 +47,12 @@ return Application::configure(basePath: dirname(__DIR__))
                     $exception->getStatusCode()
                 );
             }
+        });
+
+        $exceptions->renderable(function (RouteNotFoundException $exception, $request) {
+            return ApiResponseHelper::errorResponse(
+                $exception->getMessage(),
+                Response::HTTP_NOT_FOUND
+            );
         });
     })->create();

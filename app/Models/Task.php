@@ -69,7 +69,7 @@ class Task extends Model
             $query->withCount('notes')->orderBy('notes_count', $orderByFirst);
         }
 
-        return $query->paginate(20);
+        return $query->paginate()->appends(request()->query());
     }
 
     public function scopeGetOrderByPriority(Builder $query, ?string $orderByPriority): void
