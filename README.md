@@ -44,9 +44,14 @@ Import the provided Postman collection (Tasks Api Postman Collection.json) into 
 - Ensure that the TasksApiToken is set in the environment variables in Postman for authenticated requests.
   
 ## API Endpoints
+
+Status
+Endpoint: `GET {{TasksBaseUrl}}/status`
+Description: Checks the status of the API.
+
 Auth
 Login
-Endpoint: POST {{TasksBaseUrl}}/login
+Endpoint: `POST {{TasksBaseUrl}}/login`
 Body:
 ```json
 {
@@ -57,7 +62,7 @@ Body:
 Description: Logs in a user and sets a collection variable TasksApiToken with the token received.
 
 Register
-Endpoint: POST {{TasksBaseUrl}}/register
+Endpoint: `POST {{TasksBaseUrl}}/register`
 Body:
 ```json
 {
@@ -72,7 +77,8 @@ Description: Registers a new user.
 Tasks
 Add Task
 
-Endpoint: POST {{TasksBaseUrl}}/tasks
+Endpoint: `POST {{TasksBaseUrl}}/tasks`
+```
 Body (form-data):
     subject: "Test Subject"
     description: "Test Description"
@@ -86,11 +92,13 @@ Body (form-data):
     notes[1][subject]: "Test Title 2"
     notes[1][note]: "Test Note 2"
     notes[1][attachments][]: File
+```
 Description: Adds a new task with the provided details.
 
 Get Tasks
 
-Endpoint: GET {{TasksBaseUrl}}/tasks
+Endpoint: `GET {{TasksBaseUrl}}/tasks`
+```
 Query Parameters:
     filter[status]: "Incomplete"
     filter[due_date]: "2024-06-22"
@@ -98,9 +106,7 @@ Query Parameters:
     filter[notes]: "true"
     order[priority]: "Low"
     order[first]: "desc"
+```
 Description: Retrieves tasks with the specified filters and order.
-Status
-    Endpoint: GET {{TasksBaseUrl}}/status
-    Description: Checks the status of the API.
-    Environment Variables
+
 
