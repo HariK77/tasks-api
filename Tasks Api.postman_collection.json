@@ -72,7 +72,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Jhon Doe\",\n    \"email\": \"jhond@gmail.com@gmail.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\"\n}",
+							"raw": "{\n    \"name\": \"Jhon Doe\",\n    \"email\": \"jhond@gmail.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -149,18 +149,18 @@
 								},
 								{
 									"key": "notes[0][subject]",
-									"value": "Test Title 1",
+									"value": "Added APi Skeleton",
 									"type": "text"
 								},
 								{
 									"key": "notes[0][note]",
-									"value": "Test Note 1",
+									"value": "Create an api sturcture",
 									"type": "text"
 								},
 								{
-									"key": "notes[0][attachments][]",
+									"key": "notes[0][attachments][0]",
 									"type": "file",
-									"src": "/home/maxx/Downloads/Hari Krishna Full Stack Developer - j1924.pdf"
+									"src": "/home/maxx/Documents/Emails List.txt"
 								},
 								{
 									"key": "notes[1][subject]",
@@ -173,9 +173,14 @@
 									"type": "text"
 								},
 								{
-									"key": "notes[1][attachments][]",
+									"key": "notes[1][attachments][0]",
 									"type": "file",
-									"src": "/home/maxx/Pictures/299398791_1983372845340663_1111548640041483192_n.jpg"
+									"src": "/home/maxx/Downloads/Hari_Krishna_Full_Stack_Developer_Detailed_J1924.pdf"
+								},
+								{
+									"key": "notes[1][attachments][1]",
+									"type": "file",
+									"src": "/home/maxx/Pictures/1658658610618.jpeg"
 								}
 							]
 						},

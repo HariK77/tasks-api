@@ -2,9 +2,9 @@
 
 namespace App\Services\Tasks;
 
+use App\Helpers\UploadHelper;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\Tasks\CreateTaskRequest;
-use App\Models\Note;
 use App\Models\Task;
 
 class CreateTaskService
@@ -45,40 +45,35 @@ class CreateTaskService
                 ])
             );
 
-            foreach ($this->request->notes as $note) {
-                Note::create(
-                    [
-                        'title' => $note['title'],
-                        'task_id' => $task->id,
-                        'attachments' => $this->handleAttachments($note['attachments']),
-                        'note' => $note['note'],
-                    ]
-                );
-            }
+            $task->notes()->createMany(
+                $this->formattedNotesData(
+                    $this->request->validated('notes')
+                )
+            );
+
             $result['message'] = 'Task and related Notes are created successfully!';
             $result['code'] = Response::HTTP_CREATED;
         } catch (\Throwable $th) {
-            $result['message'] = 'Task and related Notes are created successfully!';
+            $result['message'] = $th->getMessage();
             $result['code'] = Response::HTTP_INTERNAL_SERVER_ERROR;
         }
 
         return $result;
     }
 
-    private function handleAttachments(array $attachments): string
+    protected function formattedNotesData(array $notes): array
     {
-        $fileUrls = [];
-
-        foreach ($attachments as $attachment) {
-
-            $filenameWithExt = $attachment->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-
-            $fileName = $filename . '_' . time() . '.' . $attachment->getClientOriginalExtension();
-            $attachment->move(public_path('attachments'), $fileName);
-            $fileUrls[] = asset('attachments/' . $fileName);
+        $formatted = [];
+        foreach ($notes as $note) {
+            $formatted[] = [
+                'subject' => $note['subject'],
+                'note' => $note['note'],
+                'attachments' => json_encode(
+                    UploadHelper::multipleFileUpload('attachments', $note['attachments'])
+                ),
+            ];
         }
 
-        return json_encode($fileUrls);
+        return $formatted;
     }
 }

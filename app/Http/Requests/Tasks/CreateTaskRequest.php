@@ -33,7 +33,8 @@ class CreateTaskRequest extends FormRequest
             'priority' => ['required', Rule::in(TaskPriority::all())],
             'notes.*.subject' => ['required'],
             'notes.*.note' => ['required'],
-            'notes.*.attachments.*' => ['required'],
+            'notes.*.attachments' => ['required'],
+            'notes.*.attachments.*' => ['file', 'max:2048'],
         ];
     }
 }
