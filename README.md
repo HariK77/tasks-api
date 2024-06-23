@@ -47,6 +47,7 @@ Import the provided Postman collection (Tasks Api Postman Collection.json) into 
 
 Status
 Endpoint: `GET {{TasksBaseUrl}}/status`
+
 Description: Checks the status of the API.
 
 Auth
