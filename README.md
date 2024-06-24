@@ -6,6 +6,8 @@ This is a REST API application for Tasks with Sanctum authentication and Databas
 
 ## Prerequisites
 - Ensure Docker is installed. If Docker is not available, you can run the project using Apache, Nginx, or `php artisan serve` (update database drivers and configurations based on your local environment).
+- Local php development environment with with apache or nginx, and then Mysql or PgSQl - for Manual Setup
+- Docker with root access - for Docker setup
 
 ## Environment Setup
 Change into project directory before running any commands
@@ -14,9 +16,24 @@ Change into project directory before running any commands
 Rename the .env.example file .env
 - `cp .env.example .env`
 
+## Change DB_CONNECTION value
+- Change DB_CONNECTION value t o your available database in local
+- Ex: mysql, pgsql (For Docker installation use `pgsql`)
+
 ## Setup Methods
 
 ### Docker Setup
+Run this for insatalling php composer packages to run sail
+`
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php83-composer:latest \
+    composer install --ignore-platform-reqs
+`
+
+
 Start the Docker containers:
 - `./vendor/bin/sail up`
   
