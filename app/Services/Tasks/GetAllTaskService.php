@@ -36,7 +36,7 @@ class GetAllTaskService
         return $this->request;
     }
 
-    public function process(): LengthAwarePaginator
+    public function actOn(): LengthAwarePaginator
     {
         $notes = $this->request->filter['notes'] ?? null;
         return $this->task->getAllTasks(

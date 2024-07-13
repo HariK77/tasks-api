@@ -35,7 +35,7 @@ class CreateTaskService
     /**
      * @return array
      */
-    public function process(): array
+    public function actOn(): array
     {
         $result = [];
         try {

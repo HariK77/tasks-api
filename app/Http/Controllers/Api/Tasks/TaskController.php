@@ -19,7 +19,7 @@ class TaskController extends ApiController
     public function index(GetAllTaskRequest $request, GetAllTaskService $service): JsonResource
     {
         return new TaskCollectionResource($service->setAllTaskRequest($request)
-            ->process());
+            ->actOn());
     }
 
     /**
@@ -27,7 +27,7 @@ class TaskController extends ApiController
      */
     public function store(CreateTaskRequest $request, CreateTaskService $service): JsonResponse
     {
-        $result = $service->setCreateTaskRequest($request)->process();
+        $result = $service->setCreateTaskRequest($request)->actOn();
 
         return $this->sendResponse($result['message'], $result['code']);
     }
